@@ -1,0 +1,17 @@
+# เลือก Base image ที่มี Node.js
+FROM node:14
+
+# กําหนดตําแหน่งที่จะเก็บโค้ด
+WORKDIR /app
+
+# Copy ไฟล์ package.json และ package-lock.json ไปยัง container
+COPY package*.json ./
+
+# ติดตั้ง dependencies
+RUN npm install
+
+# Copy ไฟล์ script Node.js ไปยัง container
+COPY run_bot_script.js
+
+# รัน script Node.js ที่เปิด browser
+CMD ["node", "run_bot_script.js"]
